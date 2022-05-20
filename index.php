@@ -9,7 +9,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="<?= bloginfo('template_url'); ?>/assets/images/favicon.png" type="image/x-icon" />
   <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
-  <title>Responsive Real State Website</title>
+  <title>
+    <?php
+    bloginfo('name');
+    echo ' | ';
+    bloginfo('description');
+    ?>
+  </title>
 
   <?php
   wp_head();
