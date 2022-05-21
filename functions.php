@@ -23,3 +23,7 @@ function real_state_scripts()
   wp_enqueue_script('real-state-vendors', get_template_directory_uri() . "/$root_dir/717.js", array(), null, true);
   wp_enqueue_script('real-state-index', get_template_directory_uri() . "/$root_dir/index.js", array(), null, true);
 }
+
+// Config posts
+
+add_theme_support('post-thumbnails');

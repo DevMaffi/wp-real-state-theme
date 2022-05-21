@@ -100,9 +100,11 @@ get_header();
 
   <!-- CONTAINER -->
   <div class="container">
-    <span class="section__subtitle">Best Choice</span>
+    <span class="section__subtitle">
+      <?php the_field('popular_subtitle'); ?>
+    </span>
     <h2 class="section__title">
-      Popular Residences
+      <?php the_field('popular_title'); ?>
       <span>.</span>
     </h2>
 
@@ -110,90 +112,42 @@ get_header();
     <div class="popular__container swiper">
       <div class="swiper-wrapper">
 
-        <!-- POPULAR CARD -->
-        <article class="popular__card swiper-slide">
-          <img class="popular__img" src="<?= bloginfo('template_url'); ?>/assets/images/popular1.jpg" alt="popular">
+        <?php
+        $posts = get_posts(array(
+          'numberposts' => -1,
+          'category_name' => 'popular_cards',
+          'order_by' => 'date',
+          'order' => 'ASC',
+          'post_type' => 'post',
+          'suppress_filters' => true,
+        ));
 
-          <!-- POPULAR DATA -->
-          <div class="popular__data">
-            <h2 class="popular__price">
-              <span>$</span>
-              66,356
-            </h2>
-            <h3 class="popular__title">Garden City Assat</h3>
-            <p class="popular__description">
-              Street The Garden City Of Miraflores, Lima - Perú Av. Sol #9876
-            </p>
-          </div>
-        </article>
+        foreach ($posts as $post) {
+          setup_postdata($post);
+        ?>
+          <!-- POPULAR CARD -->
+          <article class="popular__card swiper-slide">
+            <img class="popular__img" src="<?php the_post_thumbnail_url(); ?>" alt="popular">
 
-        <!-- POPULAR CARD -->
-        <article class="popular__card swiper-slide">
-          <img class="popular__img" src="<?= bloginfo('template_url'); ?>/assets/images/popular2.jpg" alt="popular">
+            <!-- POPULAR DATA -->
+            <div class="popular__data">
+              <h2 class="popular__price">
+                <span>$</span>
+                <?php the_field('card_price'); ?>
+              </h2>
+              <h3 class="popular__title">
+                <?php the_field('card_title'); ?>
+              </h3>
+              <p class="popular__description">
+                <?php the_field('card_description'); ?>
+              </p>
+            </div>
+          </article>
+        <?php
+        }
 
-          <!-- POPULAR DATA -->
-          <div class="popular__data">
-            <h2 class="popular__price">
-              <span>$</span>
-              35,159
-            </h2>
-            <h3 class="popular__title">Gables Luxurious House</h3>
-            <p class="popular__description">
-              Street The Garden City Of Miraflores, Lima - Perú Av. Sol #9876
-            </p>
-          </div>
-        </article>
-
-        <!-- POPULAR CARD -->
-        <article class="popular__card swiper-slide">
-          <img class="popular__img" src="<?= bloginfo('template_url'); ?>/assets/images/popular3.jpg" alt="popular">
-
-          <!-- POPULAR DATA -->
-          <div class="popular__data">
-            <h2 class="popular__price">
-              <span>$</span>
-              75,043
-            </h2>
-            <h3 class="popular__title">Garden Orchard City</h3>
-            <p class="popular__description">
-              Street The Garden City Of Miraflores, Lima - Perú Av. Sol #9876
-            </p>
-          </div>
-        </article>
-
-        <!-- POPULAR CARD -->
-        <article class="popular__card swiper-slide">
-          <img class="popular__img" src="<?= bloginfo('template_url'); ?>/assets/images/popular4.jpg" alt="popular">
-
-          <!-- POPULAR DATA -->
-          <div class="popular__data">
-            <h2 class="popular__price">
-              <span>$</span>
-              62,024
-            </h2>
-            <h3 class="popular__title">Luxurious City Garden</h3>
-            <p class="popular__description">
-              Street The Garden City Of Miraflores, Lima - Perú Av. Sol #9876
-            </p>
-          </div>
-        </article>
-
-        <!-- POPULAR CARD -->
-        <article class="popular__card swiper-slide">
-          <img class="popular__img" src="<?= bloginfo('template_url'); ?>/assets/images/popular5.jpg" alt="popular">
-
-          <!-- POPULAR DATA -->
-          <div class="popular__data">
-            <h2 class="popular__price">
-              <span>$</span>
-              47,043
-            </h2>
-            <h3 class="popular__title">Aliva Private Garden</h3>
-            <p class="popular__description">
-              Street The Garden City Of Miraflores, Lima - Perú Av. Sol #9876
-            </p>
-          </div>
-        </article>
+        wp_reset_postdata();
+        ?>
       </div>
 
       <!-- SWIPER NAVIGATION -->
