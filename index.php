@@ -320,9 +320,11 @@ get_header();
 
   <!-- SUBSCRIBE CONTAINER -->
   <div class="subscribe__container container">
-    <h2 class="subscribe__title">Get Started with Holux</h2>
+    <h2 class="subscribe__title">
+      <?php the_field('subscribe_title'); ?>
+    </h2>
     <p class="subscribe__description">
-      Subscribe and find super attractive price quotes from us, Find your residence soon
+      <?php the_field('subscribe_description'); ?>
     </p>
     <a class="button subscribe__button" href="#">Get Started</a>
   </div>
