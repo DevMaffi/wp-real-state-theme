@@ -171,7 +171,7 @@ get_header();
     <div class="value__images">
       <div class="value__orbe"></div>
       <div class="value__img">
-        <img src="<?= bloginfo('template_url'); ?>/assets/images/value.jpg" alt="value image">
+        <img src="<?php the_field('value_img'); ?>" alt="value image">
       </div>
     </div>
 
@@ -180,106 +180,60 @@ get_header();
 
       <!-- VALUE DATA -->
       <div class="value__data">
-        <span class="section__subtitle">Our Value</span>
+        <span class="section__subtitle">
+          <?php the_field('value_subtitle'); ?>
+        </span>
         <h2 class="section__title">
-          Value We Give To You
+          <?php the_field('value_title'); ?>
           <span>.</span>
         </h2>
         <p class="value__description">
-          We always ready to help by providing the best service for you. We believe a good place to live can make your life better.
+          <?php the_field('value_description'); ?>
         </p>
       </div>
 
       <!-- VALUE ACCORDION -->
       <div class="value__accordion">
 
-        <!-- ACCORDION ITEM -->
-        <div class="value__accordion-item">
+        <?php
+        $posts = get_posts(array(
+          'numberposts' => 4,
+          'category_name' => 'value_accordion',
+          'order_by' => 'date',
+          'order' => 'ASC',
+          'post_type' => 'post',
+          'suppress_filters' => true,
+        ));
 
-          <!-- ACCORDION HEADER -->
-          <header class="value__accordion-header">
-            <i class="value__accordion-icon bx bxs-shield-x"></i>
-            <h3 class="value__accordion-title">
-              Best interest rates on the market
-            </h3>
-            <div class="value__accordion-arrow">
-              <i class="bx bxs-down-arrow"></i>
+        foreach ($posts as $post) {
+          setup_postdata($post);
+        ?>
+          <!-- ACCORDION ITEM -->
+          <div class="value__accordion-item">
+
+            <!-- ACCORDION HEADER -->
+            <header class="value__accordion-header">
+              <i class="value__accordion-icon <?php the_field('item_icon'); ?>"></i>
+              <h3 class="value__accordion-title">
+                <?php the_field('item_title'); ?>
+              </h3>
+              <div class="value__accordion-arrow">
+                <i class="bx bxs-down-arrow"></i>
+              </div>
+            </header>
+
+            <!-- ACCORDION CONTENT -->
+            <div class="value__accordion-content">
+              <p class="value__accordion-description">
+                <?php the_field('item_description'); ?>
+              </p>
             </div>
-          </header>
-
-          <!-- ACCORDION CONTENT -->
-          <div class="value__accordion-content">
-            <p class="value__accordion-description">
-              Price we provides is the best for you, we guarantee no price changes on your property due to various unexpected costs that may come.
-            </p>
           </div>
-        </div>
+        <?php
+        }
 
-        <!-- ACCORDION ITEM -->
-        <div class="value__accordion-item">
-
-          <!-- ACCORDION HEADER -->
-          <header class="value__accordion-header">
-            <i class="value__accordion-icon bx bxs-x-square"></i>
-            <h3 class="value__accordion-title">
-              Prevent unstable prices
-            </h3>
-            <div class="value__accordion-arrow">
-              <i class="bx bxs-down-arrow"></i>
-            </div>
-          </header>
-
-          <!-- ACCORDION CONTENT -->
-          <div class="value__accordion-content">
-            <p class="value__accordion-description">
-              Price we provides is the best for you, we guarantee no price changes on your property due to various unexpected costs that may come.
-            </p>
-          </div>
-        </div>
-
-        <!-- ACCORDION ITEM -->
-        <div class="value__accordion-item">
-
-          <!-- ACCORDION HEADER -->
-          <header class="value__accordion-header">
-            <i class="value__accordion-icon bx bxs-bar-chart-square"></i>
-            <h3 class="value__accordion-title">
-              Best prices on the market
-            </h3>
-            <div class="value__accordion-arrow">
-              <i class="bx bxs-down-arrow"></i>
-            </div>
-          </header>
-
-          <!-- ACCORDION CONTENT -->
-          <div class="value__accordion-content">
-            <p class="value__accordion-description">
-              Price we provides is the best for you, we guarantee no price changes on your property due to various unexpected costs that may come.
-            </p>
-          </div>
-        </div>
-
-        <!-- ACCORDION ITEM -->
-        <div class="value__accordion-item">
-
-          <!-- ACCORDION HEADER -->
-          <header class="value__accordion-header">
-            <i class="value__accordion-icon bx bxs-check-square"></i>
-            <h3 class="value__accordion-title">
-              Security of your data
-            </h3>
-            <div class="value__accordion-arrow">
-              <i class="bx bxs-down-arrow"></i>
-            </div>
-          </header>
-
-          <!-- ACCORDION CONTENT -->
-          <div class="value__accordion-content">
-            <p class="value__accordion-description">
-              Price we provides is the best for you, we guarantee no price changes on your property due to various unexpected costs that may come.
-            </p>
-          </div>
-        </div>
+        wp_reset_postdata();
+        ?>
       </div>
     </div>
   </div>
