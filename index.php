@@ -249,7 +249,7 @@ get_header();
     <div class="contact__images">
       <div class="contact__orbe"></div>
       <div class="contact__img">
-        <img src="<?= bloginfo('template_url'); ?>/assets/images/contact.png" alt="contact image">
+        <img src="<?php the_field('contact_img'); ?>" alt="contact image">
       </div>
     </div>
 
@@ -257,90 +257,59 @@ get_header();
     <div class="contact__content">
 
       <!-- CONTACT DATA -->
-      <div class="contact__data"><span class="section__subtitle">Contact Us</span>
+      <div class="contact__data">
+        <span class="section__subtitle">
+          <?php the_field('contact_title'); ?>
+        </span>
         <h3 class="section__title">
-          Easy to Contact us
+          <?php the_field('contact_title'); ?>
           <span>.</span>
         </h3>
         <div class="contact__description">
-          Is there a problem finding your dream home? Need a guide in buying first home? or need a consultation on residential issues? just contact us.
+          <?php the_field('contact_description'); ?>
         </div>
       </div>
 
       <!-- CONTACT CARD -->
       <div class="contact__card">
 
-        <!-- CARD BOX -->
-        <div class="contact__card-box">
+        <?php
+        $posts = get_posts(array(
+          'numberposts' => 4,
+          'category_name' => 'contact_cards',
+          'order_by' => 'date',
+          'order' => 'ASC',
+          'post_type' => 'post',
+          'suppress_filters' => true,
+        ));
 
-          <!-- CARD INFO  -->
-          <div class="contact__card-info">
-            <i class="bx bxs-phone-call"></i>
-            <div>
-              <h3 class="contact__card-title">Call</h3>
-              <p class="contact__card-description">
-                022.321.165.19
-              </p>
+        foreach ($posts as $post) {
+          setup_postdata($post);
+        ?>
+          <!-- CARD BOX -->
+          <div class="contact__card-box">
+
+            <!-- CARD INFO  -->
+            <div class="contact__card-info">
+              <i class="<?php the_field('card_icon'); ?>"></i>
+              <div>
+                <h3 class="contact__card-title">
+                  <?php the_field('card_title'); ?>
+                </h3>
+                <p class="contact__card-description">
+                  <?php the_field('card_description'); ?>
+                </p>
+              </div>
             </div>
+            <button class="button contact__card-button">
+              <?php the_field('card_button_text'); ?>
+            </button>
           </div>
-          <button class="button contact__card-button">
-            Call Now
-          </button>
-        </div>
+        <?php
+        }
 
-        <!-- CARD BOX -->
-        <div class="contact__card-box">
-
-          <!-- CARD INFO  -->
-          <div class="contact__card-info">
-            <i class="bx bxs-message-rounded-dots"></i>
-            <div>
-              <h3 class="contact__card-title">Chat</h3>
-              <p class="contact__card-description">
-                022.321.165.19
-              </p>
-            </div>
-          </div>
-          <button class="button contact__card-button">
-            Chat Now
-          </button>
-        </div>
-
-        <!-- CARD BOX -->
-        <div class="contact__card-box">
-
-          <!-- CARD INFO  -->
-          <div class="contact__card-info">
-            <i class="bx bxs-video"></i>
-            <div>
-              <h3 class="contact__card-title">Video Call</h3>
-              <p class="contact__card-description">
-                022.321.165.19
-              </p>
-            </div>
-          </div>
-          <button class="button contact__card-button">
-            Video Call Now
-          </button>
-        </div>
-
-        <!-- CARD BOX -->
-        <div class="contact__card-box">
-
-          <!-- CARD INFO  -->
-          <div class="contact__card-info">
-            <i class="bx bxs-envelope"></i>
-            <div>
-              <h3 class="contact__card-title">Message</h3>
-              <p class="contact__card-description">
-                022.321.165.19
-              </p>
-            </div>
-          </div>
-          <button class="button contact__card-button">
-            Message Now
-          </button>
-        </div>
+        wp_reset_postdata();
+        ?>
       </div>
     </div>
   </div>
