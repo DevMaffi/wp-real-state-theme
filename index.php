@@ -71,18 +71,27 @@ get_header();
 
   <!-- LOGOS CONTAINER -->
   <div class="logos__container container grid">
-    <div class="logos__img">
-      <img src="<?= bloginfo('template_url'); ?>/assets/images/logo1.png" alt="logo">
-    </div>
-    <div class="logos__img">
-      <img src="<?= bloginfo('template_url'); ?>/assets/images/logo2.png" alt="logo">
-    </div>
-    <div class="logos__img">
-      <img src="<?= bloginfo('template_url'); ?>/assets/images/logo3.png" alt="logo">
-    </div>
-    <div class="logos__img">
-      <img src="<?= bloginfo('template_url'); ?>/assets/images/logo4.png" alt="logo">
-    </div>
+    <?php
+    $posts = get_posts(array(
+      'numberposts' => 4,
+      'category_name' => 'logos',
+      'order_by' => 'date',
+      'order' => 'ASC',
+      'post_type' => 'post',
+      'suppress_filters' => true,
+    ));
+
+    foreach ($posts as $post) {
+      setup_postdata($post);
+    ?>
+      <div class="logos__img">
+        <img src="<?php the_field('logo_img'); ?>" alt="logo">
+      </div>
+    <?php
+    }
+
+    wp_reset_postdata();
+    ?>
   </div>
 </section>
 
