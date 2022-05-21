@@ -11,14 +11,10 @@ get_header();
     <!-- HOME DATA -->
     <div class="home__data">
       <h1 class="home__title">
-        Discover
-        <br />
-        Most Suitable
-        <br />
-        Property
+        <?php the_field('home_title'); ?>
       </h1>
       <p class="home__description">
-        Find a variety of properties that suit you very easily, forget all difficulties in finding a residence for you
+        <?php the_field('home_descr'); ?>
       </p>
 
       <!-- HOME SEARCH -->
@@ -30,39 +26,33 @@ get_header();
 
       <!-- HOME VALUE -->
       <div class="home__value">
-        <div>
-          <h2 class="home__value-number">
-            9K
-            <span>+</span>
-          </h2>
-          <span class="home__value-description">
-            Premium
-            <br />
-            Product
-          </span>
-        </div>
-        <div>
-          <h2 class="home__value-number">
-            28K
-            <span>+</span>
-          </h2>
-          <span class="home__value-description">
-            Happy
-            <br />
-            Customers
-          </span>
-        </div>
-        <div>
-          <h2 class="home__value-number">
-            2K
-            <span>+</span>
-          </h2>
-          <span class="home__value-description">
-            Awards
-            <br />
-            Winning
-          </span>
-        </div>
+        <?php
+        $posts = get_posts(array(
+          'numberposts' => 3,
+          'category_name' => 'home_value',
+          'order_by' => 'date',
+          'order' => 'ASC',
+          'post_type' => 'post',
+          'suppress_filters' => true,
+        ));
+
+        foreach ($posts as $post) {
+          setup_postdata($post);
+        ?>
+          <div>
+            <h2 class="home__value-number">
+              <?php the_field('value_number'); ?>
+              <span>+</span>
+            </h2>
+            <span class="home__value-description">
+              <?php the_field('value_description'); ?>
+            </span>
+          </div>
+        <?php
+        }
+
+        wp_reset_postdata();
+        ?>
       </div>
     </div>
 
@@ -70,7 +60,7 @@ get_header();
     <div class="home__images">
       <div class="home__orbe"></div>
       <div class="home__img">
-        <img src="<?= bloginfo('template_url'); ?>/assets/images/home.jpg" alt="home image">
+        <img src="<?php the_field('home_img'); ?>" alt="home image">
       </div>
     </div>
   </div>
