@@ -21,9 +21,7 @@
         <i class="bx bxs-home-alt-2"></i>
       </a>
       <p class="footer__description">
-        Our vision is to make all people
-        <br />
-        the best place to live for them.
+        <?php the_field('footer_description'); ?>
       </p>
     </div>
 
@@ -105,7 +103,7 @@
   <!-- FOOTER INFO -->
   <div class="footer__info container">
     <span class="footer__copy">
-      &#169; 2022 Holux. All rights reserved
+      <?php the_field('footer_copy'); ?>
     </span>
     <div class="footer__privacy">
       <a href="#">Terms &amp; Agreements</a>
