@@ -42,6 +42,7 @@
         ]);
         ?>
       </div>
+
       <div>
         <h3 class="footer__title">Company</h3>
 
@@ -57,6 +58,7 @@
         ]);
         ?>
       </div>
+
       <div>
         <h3 class="footer__title">Support</h3>
 
@@ -72,26 +74,35 @@
         ]);
         ?>
       </div>
+
       <div>
         <h3 class="footer__title">Follow us</h3>
 
         <!-- FOOTER SOCIAL -->
         <ul class="footer__social">
-          <li>
-            <a class="footer__social-link" href="https://www.facebook/" target="_blank">
-              <i class="bx bxl-facebook-circle"></i>
-            </a>
-          </li>
-          <li>
-            <a class="footer__social-link" href="https://www.instagram.com/" target="_blank">
-              <i class="bx bxl-instagram-alt"></i>
-            </a>
-          </li>
-          <li>
-            <a class="footer__social-link" href="https://www.pinterest.com/" target="_blank">
-              <i class="bx bxl-pinterest"></i>
-            </a>
-          </li>
+          <?php
+          $posts = get_posts(array(
+            'numberposts' => 3,
+            'category_name' => 'social_links',
+            'order_by' => 'date',
+            'order' => 'ASC',
+            'post_type' => 'post',
+            'suppress_filters' => true,
+          ));
+
+          foreach ($posts as $post) {
+            setup_postdata($post);
+          ?>
+            <li>
+              <a class="footer__social-link" href="<?php the_field('link_ref'); ?>" target="_blank">
+                <i class="<?php the_field('link_icon'); ?>"></i>
+              </a>
+            </li>
+          <?php
+          }
+
+          wp_reset_postdata();
+          ?>
         </ul>
       </div>
     </div>
