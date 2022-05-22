@@ -30,50 +30,47 @@
       <div>
         <h3 class="footer__title">About</h3>
 
-        <!-- FOOTER LINKS -->
-        <ul class="footer__links">
-          <li>
-            <a class="footer__link" href="#">About Us</a>
-          </li>
-          <li>
-            <a class="footer__link" href="#">Features</a>
-          </li>
-          <li>
-            <a class="footer__link" href="#">News &amp; Blog</a>
-          </li>
-        </ul>
+        <?php
+        wp_nav_menu([
+          'menu' => 'About menu',
+          'container' => false,
+          'menu_class' => 'footer__links',
+          'echo' => true,
+          'fallback_cb' => 'wp_page_menu',
+          'items_wrap' => '<ul class="%2$s">%3$s</ul>',
+          'depth' => 1,
+        ]);
+        ?>
       </div>
       <div>
         <h3 class="footer__title">Company</h3>
 
-        <!-- FOOTER LINKS -->
-        <ul class="footer__links">
-          <li>
-            <a class="footer__link" href="#">How We Work?</a>
-          </li>
-          <li>
-            <a class="footer__link" href="#">Capital</a>
-          </li>
-          <li>
-            <a class="footer__link" href="#">Security</a>
-          </li>
-        </ul>
+        <?php
+        wp_nav_menu([
+          'menu' => 'Company menu',
+          'container' => false,
+          'menu_class' => 'footer__links',
+          'echo' => true,
+          'fallback_cb' => 'wp_page_menu',
+          'items_wrap' => '<ul class="%2$s">%3$s</ul>',
+          'depth' => 1,
+        ]);
+        ?>
       </div>
       <div>
         <h3 class="footer__title">Support</h3>
 
-        <!-- FOOTER LINKS -->
-        <ul class="footer__links">
-          <li>
-            <a class="footer__link" href="#">FAQs</a>
-          </li>
-          <li>
-            <a class="footer__link" href="#">Support center</a>
-          </li>
-          <li>
-            <a class="footer__link" href="#">Contact Us</a>
-          </li>
-        </ul>
+        <?php
+        wp_nav_menu([
+          'menu' => 'Support menu',
+          'container' => false,
+          'menu_class' => 'footer__links',
+          'echo' => true,
+          'fallback_cb' => 'wp_page_menu',
+          'items_wrap' => '<ul class="%2$s">%3$s</ul>',
+          'depth' => 1,
+        ]);
+        ?>
       </div>
       <div>
         <h3 class="footer__title">Follow us</h3>

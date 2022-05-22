@@ -27,3 +27,20 @@ function real_state_scripts()
 // Config posts
 
 add_theme_support('post-thumbnails');
+
+// Handle menus
+
+add_theme_support('menus');
+
+add_filter('nav_menu_link_attributes', 'filter_menu_links', 10, 3);
+
+function filter_menu_links($atts, $item, $args)
+{
+  $menus = ['About menu', 'Company menu', 'Support menu'];
+
+  if (in_array($args->menu, $menus)) {
+    $atts['class'] = 'footer__link';
+  }
+
+  return $atts;
+}
